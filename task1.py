@@ -1,8 +1,7 @@
-import logging
 from abc import ABC, abstractmethod
 from typing import Type
 
-logging.basicConfig(level=logging.INFO)
+from logger import logger
 
 
 # Step 1: Create an abstract base class Vehicle
@@ -20,12 +19,12 @@ class Vehicle(ABC):
 # Step 2: Modify Car and Motorcycle to inherit from Vehicle
 class Car(Vehicle):
     def start_engine(self) -> None:
-        logging.info(f"{self.make} {self.model} ({self.spec}): Engine started")
+        logger.info(f"{self.make} {self.model} ({self.spec}): Engine started")
 
 
 class Motorcycle(Vehicle):
     def start_engine(self) -> None:
-        logging.info(f"{self.make} {self.model} ({self.spec}): Motor started")
+        logger.info(f"{self.make} {self.model} ({self.spec}): Motor started")
 
 
 # Step 3: Create an abstract VehicleFactory class
@@ -70,7 +69,7 @@ def main() -> None:
     us_car.start_engine()
     us_motorcycle.start_engine()
 
-    logging.info("-" * 20)
+    logger.info("-" * 20)
 
     # Create EU Spec vehicles
     eu_car: Car = eu_factory.create_car("Volkswagen", "Golf")

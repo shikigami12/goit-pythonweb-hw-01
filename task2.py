@@ -1,8 +1,7 @@
-import logging
 from abc import ABC, abstractmethod
 from typing import List, Optional
 
-logging.basicConfig(level=logging.INFO)
+from logger import logger
 
 
 # SRP: Book class is responsible for book data
@@ -38,7 +37,7 @@ class Library(LibraryInterface):
 
     def add_book(self, book: Book) -> None:
         self.books.append(book)
-        logging.info(f"Book '{book.title}' added.")
+        logger.info(f"Book '{book.title}' added.")
 
     def remove_book(self, title: str) -> None:
         book_to_remove: Optional[Book] = None
@@ -48,15 +47,15 @@ class Library(LibraryInterface):
                 break
         if book_to_remove:
             self.books.remove(book_to_remove)
-            logging.info(f"Book '{title}' removed.")
+            logger.info(f"Book '{title}' removed.")
         else:
-            logging.info(f"Book '{title}' not found.")
+            logger.info(f"Book '{title}' not found.")
 
     def show_books(self) -> None:
         if not self.books:
-            logging.info("The library is empty.")
+            logger.info("The library is empty.")
         for book in self.books:
-            logging.info(book)
+            logger.info(book)
 
 
 # DIP: LibraryManager depends on the abstraction (LibraryInterface)
@@ -96,10 +95,10 @@ def main() -> None:
             case "show":
                 manager.show_books()
             case "exit":
-                logging.info("Exiting the program.")
+                logger.info("Exiting the program.")
                 break
             case _:
-                logging.info("Invalid command. Please try again.")
+                logger.info("Invalid command. Please try again.")
 
 
 if __name__ == "__main__":
